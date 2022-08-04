@@ -13,7 +13,7 @@ library(ggplot2)
 fname = 'EDX example.msa'
 
 
-#Check this file is an suitable type - read in lines
+#Check this file is a suitable type - read in lines
 rl <- readLines(fname)
 #use grep to loof for the SIGNALTYPE
 r <- unlist(strsplit(rl[grep('SIGNALTYPE', rl)], ":"))

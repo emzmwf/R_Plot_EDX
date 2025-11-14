@@ -42,7 +42,7 @@ EDSPlot <- function(AX1='keV', AX2='counts'){
 
   #Set up plot
   p <- ggplot() +
-    geom_line(data = MSA, aes(x=x_num, y=V2, group=1), color="red")+
+    geom_line(data = MSA, aes(x=x_num, y=V2, group=1), color=linecol, size = linewid)+
     xlab(AX1)+ ylab(AX2)+  
     geom_point(data = datlab,alpha = 0, aes(x=energy, y=min(countsmax, ecounts)))+    #alpha set to zero so points are transparent
     geom_text(data = datlab,
@@ -82,7 +82,7 @@ EELSPlot <- function(AX1='eV', AX2='counts'){
   rm(mv)
   
   p <- ggplot() +
-    geom_line(data = MSA, aes(x=x_num, y=V2, group=1), color="red")+
+    geom_line(data = MSA, aes(x=x_num, y=V2, group=1), color=linecol, size = linewid)+
     xlab(AX1)+ ylab(AX2)+
     theme(text = element_text(size=20))
   p
@@ -186,7 +186,7 @@ parsemsa_function <- function(fname) {
 ###############################################
 
 #Example EDX plot
-fname = '//nmrc-nas.nottingham.ac.uk/data/Data Processing Area/Scripts/R scripts/EDX Spectrum calibration grid carbon cross line grating replica with AuPd shadowing.msa'
+fname = 'D:/_ExampleData/Blank Grid References/ContinousCarbon.txt'
 
 #Or if rstudioapi is installed can use user interface to load
 #library(rstudioapi)
@@ -194,14 +194,18 @@ fname = '//nmrc-nas.nottingham.ac.uk/data/Data Processing Area/Scripts/R scripts
 #                               filter = "MSA or Text Files (*.msa | *.txt)",
 #                               existing = TRUE)
 
-# Define x plot range in keV
-xmin = -0.5
-xmax = 5
+# Define x plot range in keV - note C at 0.277
+xmin = 0.25
+xmax = 20
 
 # Define keV range to look for highest peak
 # For TEM samples on carbon film on Cu, may want to select between the two Cu peaks (0.930 and 8.040keV)
-ypeakmin = 1.0
-ypeakmax = 7.5
+ypeakmin = 0.25
+ypeakmax = 20
+
+# Define line width and colour
+linewid = 1
+linecol = "red"
 
 # define the export details for the graph
 # default unit is inches
@@ -217,4 +221,5 @@ parsemsa_function(fname)
 #########################################################################
 ## TODO - option to find and process all msa format text files in folder
 #########################################################################
+
 
